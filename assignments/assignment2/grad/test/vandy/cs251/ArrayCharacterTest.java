@@ -44,6 +44,42 @@ public class ArrayCharacterTest {
     }
 
     @Test
+    //**JC** Added this test for 'remove'
+    public void test_item_remove() {
+        Array<Character> tmp = new Array<Character>(10, 'z');
+        tmp.set(0, 'a');
+        tmp.set(1, 'b');
+        tmp.set(2, 'c');
+        tmp.set(3, 'd');
+        tmp.resize(3);
+        Character item = tmp.remove(1);
+        assertEquals('b', (char)item);
+        assertEquals(2, tmp.size());
+        assertEquals('c', (char)tmp.get(1));
+
+        tmp.resize(10);
+        tmp.set(0, 'a');
+        tmp.set(1, 'b');
+        tmp.set(2, 'c');
+        tmp.set(3, 'd');
+        tmp.resize(3);
+        item = tmp.remove(0);
+        assertEquals('a', (char)item);
+        assertEquals(2, tmp.size());
+        assertEquals('b', (char)tmp.get(0));
+        
+        tmp.resize(10);;
+        tmp.set(0, 'a');
+        tmp.set(1, 'b');
+        tmp.set(2, 'c');
+        tmp.set(3, 'd');
+        tmp.resize(3);
+        item = tmp.remove(2);
+        assertEquals('c', (char)item);
+        assertEquals(2, tmp.size());
+    }
+    
+    @Test
     public void test_CopyConstructor() {
         Array<Character> tmp = new Array<Character>(10, 'b');
 
@@ -340,7 +376,8 @@ public class ArrayCharacterTest {
     it = a.iterator ();
     c = it.next ();
     it.remove ();
-
+//    it.remove (); //**JC** added to make test reflect what I believe is true
+    
     exception.expect(IllegalStateException.class);
     it.remove ();
   }
